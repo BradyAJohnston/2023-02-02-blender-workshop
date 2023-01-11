@@ -1,6 +1,6 @@
 ---
 title: "Protein Visualisation Workshop"
-subtitle: "Protein visualisation workshop for ETH Zurich, November 10-11."
+subtitle: "Protein visualisation workshop for MIPS, February 02-03, 2023."
 ---
 
 The outline for this workshop is as below:
