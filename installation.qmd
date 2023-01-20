@@ -1,34 +1,112 @@
 ---
 title: "Installation"
-subtitle: "Software required for the Protein Visualisation Workshop."
 ---
 
-## Installing Blender
+To install molecular nodes, download the [latest release](https://github.com/BradyAJohnston/MolecularNodes/releases) from the github releases page. Ensure that you have a version of Molecular Nodes that matches the version of Blender you have installed.
 
-Download and install the latest `3.3.1 LTS` release of Blender from the [downloads page](https://www.blender.org/download/).
+::: callout-caution
+## Blender Version 3.4
+
+Molecular Nodes `2.0` is only compatible with Blender 3.4 & above.\
+\
+There are earlier versions of MN which are compatible with earlier versions of Blender, but these are no longer being developed or maintained and it is highly recommended that you use the most recent Blender and Molecular Nodes.
+
+Details for each release are available on the [releases page](https://github.com/BradyAJohnston/MolecularNodes/releases).
+:::
+
+## Downloading Requirements
+
+1.  Download and install Blender 3.4 from [blender.org](https://www.blender.org/download/).
+
+2.  Download the latest MolecularNodes from the [MolecularNodes Releases Page](https://github.com/BradyAJohnston/MolecularNodes/releases/).
 
 ::: callout-warning
-If you are using a Mac, ensure you download the correct Intel or ARM version of Blender.
+### Download the Right Thing
 
-If you are are using a newer M1 or M2 mac, download the ARM version, otherwise download the Intel version.
+Importantly do not download the entire MolecularNodes GitHub repo and try to install that. Download the bundled release from the [release page](https://github.com/BradyAJohnston/MolecularNodes/releases) and install that with Blender.
+
+![](https://imgur.com/3thv8YM)
 :::
 
-## Installing Molecular Nodes
+## Installing the Addon
 
-Download the [latest release](https://github.com/BradyAJohnston/MolecularNodes/releases) of Molecular Nodes (currently `v0.13.0`).
+### Open a New Session of Blender
 
-::: callout-important
-## Installing on a Mac
+::: callout-warning
+### Administrator
 
-When downloading `.zip` files on Safari on a Mac, Apple tries to be helpful and automatically unzips the file. To install the file inside of Blender, you must have the `.zip` file and not the unzipped folder. Either download with a different browser (i.e. FireFox) or zip the file manually yourself for installation into Blender.
+If you are on Windows, you may need to run Blender as Administrator to install additional dependencies successfully.
 :::
 
-Follow the detailed [installation instructions](https://bradyajohnston.github.io/MolecularNodes/installation.html) about how to install the first part of Molecular Nodes.
+### Open Preferences Panel
 
-::: callout-note
-The optional MDAnalysis installation is not required for this workshop. Feel free to follow the instructions and install it to enable import of molecular dynamics trajectories, but we will likely not be going over that aspect in the workshop.
+> Click 'Edit' -\> 'Preferences' or press <kbd>Cmd</kbd> + <kbd> ,</kbd> on Mac.
+
+![](https://imgur.com/Mv8tHMC)
+
+### Click 'Install' on the Addon Page
+
+> Click on the 'Add-ons\` tab on the middle left, then the 'Install' button on the top right.
+
+![](https://imgur.com/6ri9FUl)
+
+### Select `MolecularNodes_X.zip`
+
+> The `X`'s will be the current version number of the add-on.
+
+::: callout-warning
+### `.zip` Files
+
+When downloading on MacOS with Safari, it automatically unzips the file into a `MolecularNodes` folder. This is extremely unhelpful as Blender requires the `.zip` file to install the addon. Either download with a different browser, or compress the folder again to `MolecularNodes.zip`.
 :::
 
-## Installing PyMol or ChimeraX
+![](https://imgur.com/uFWZP42)
 
-You likely already have either [PyMol](https://pymol.org/2/), [ChimeraX](https://www.cgl.ucsf.edu/chimerax/download.html) or [VMD](https://www.ks.uiuc.edu/Research/vmd/) installed. Any version of any of these programs should be fine, and they will only be used in the first part of part of the workshop.
+### Enable the Add-on
+
+If the preferences panel doesn't automatically show the installed add-on, search for the add-on to find it. Tick the box in the upper-left corner to enable it.
+
+![](https://imgur.com/8vVmzVt)
+
+The nodes are now enabled and available inside of Geometry Nodes in Blender. However to be able to download and parse structure files, additional python libraries will need to be installed via `pip` in the next step.
+
+## Installing `Biotite` & `MDAnalysis`
+There are two additional python packages which are required for MolecularNodes to function.
+
+[`Biotite`](https://biotite-python.org) handles the majority of the structure file parsing. [`MDAnalysis`](https://www.mdanalysis.org/) handles the reading of molecular dynamics trajectories.
+
+To install both packages, it should be a single button press inside of Blender, unless you are on an M1 or M2 Mac.
+
+Click the 'Install Packages' button in the Molecular Nodes tab, which is under the 'Scene Properties' Tab.
+![](https://imgur.com/ePIhaGq)
+
+::: {.callout-warning}
+## MacOS M1 & M2
+
+The ARM bundle for Blender is missing some `python.h` headers and is thus unable to install and compile `SciPy` and a number of other packages that are required for install.
+
+Unfortunately you won't be able to install the python pacakges by simply clicking the button.
+
+The current fix is to create and link a separate python installation that is able to compile the packages correctly discussed [here](https://github.com/BradyAJohnston/MolecularNodes/issues/108#issuecomment-1355965223).
+
+In short:
+
+1.  Install [miniconda](https://docs.conda.io/en/latest/miniconda.html)
+2.  Create a python environment specifically for MolecularNodes
+
+``` bash
+conda create -n molnodes python==3.10 biotite==0.35.0 mdanalysis==2.2.0 -c conda-forge -y
+```
+
+3.  Backup Blender's current python packages.
+
+``` bash
+mv /Applications/Blender.app/Contents/Resources/3.4/python /Applications/Blender.app/Contents/Resources/3.4/old_python
+```
+
+4.  Create a link between the installed conda environment and Blender
+
+``` bash
+ln -s /path/to/miniconda/python /Applications/Blender.app/Contents/Resources/3.4/python
+```
+:::

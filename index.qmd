@@ -3,7 +3,20 @@ title: "Protein Visualisation Workshop"
 subtitle: "Protein visualisation workshop for MIPS, February 02-03, 2023."
 ---
 
-The outline for this workshop is as below:
+### Before the Workshop
+Ensure you have downloaded and installed the latest Blender (currently 3.4.1), as well as downloaded and installed the latest Molecular Nodes. Instructions can be followed on the [Installation page](installation.qmd). If you are on an M1 or M2 Mac, try your best to follow the installation instructions (they are slightly more complicated). If you have trouble we can help you on the day.
+
+### What to Bring
+If you have access to more than one laptop, the most powerful laptop you can get your hands on. Blender is well optimised to run even on older and less powerful computers, but the more powerful the computer, the easier your journey will be.
+
+- Laptop 
+  - the more powerful the better (specifically GPU)
+- Power cable
+  - you **WILL** run out of battery otherwise
+- External 3-button mouse 
+  - not a _requirement_, but will make working in Blender easier
+
+### Workshop Outline
 
 1. Absolute introduction to Blender (really basics)
 - The different workspaces
